@@ -40,7 +40,7 @@ func Run(version string) {
 	}
 
 	if len(os.Args) == 2 && os.Args[1] == "download" {
-		if err := install(root, version); err != nil {
+		if err := Install(root, version); err != nil {
 			log.Fatalf("%s: download failed: %v", version, err)
 		}
 		os.Exit(0)
@@ -67,9 +67,9 @@ func Run(version string) {
 	os.Exit(0)
 }
 
-// install installs a version of Go to the named target directory, creating the
+// Install installs a version of Go to the named target directory, creating the
 // directory as needed.
-func install(targetDir, version string) error {
+func Install(targetDir, version string) error {
 	if _, err := os.Stat(filepath.Join(targetDir, unpackedOkay)); err == nil {
 		log.Printf("%s: already downloaded in %v", version, targetDir)
 		return nil
